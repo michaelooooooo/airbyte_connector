@@ -23,7 +23,7 @@ class DestinationS3deepkeep(Destination):
     ) -> Iterable[AirbyteMessage]:
 
         """
-        TODO
+        ODO
         Reads the input stream of messages, config, and catalog to write data to the destination.
 
         This method returns an iterable (typically a generator of AirbyteMessages via yield) containing state messages received
@@ -82,7 +82,7 @@ class DestinationS3deepkeep(Destination):
             s3.Object(bucket_name, "streams.json").put(Body=json.dumps(streams))
 
         except NoCredentialsError:
-            print("No AWS credentials found in the config file")
+            print("No AWS credentials found in the config file ")
 
         pass
 
@@ -100,7 +100,7 @@ class DestinationS3deepkeep(Destination):
         """
         print("Hello World3")
         try:
-            # TODO
+            # ODO
 
             return AirbyteConnectionStatus(status=Status.SUCCEEDED)
         except Exception as e:
