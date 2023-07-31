@@ -46,8 +46,8 @@ class DestinationS3deepkeep(Destination):
         print("config ")
         print(config)
         bucket_name = config["s3_bucket_name"]
-        aws_access_key_id = "michael"  # config["access_key_id"]
-        aws_secret_access_key = "12345678"  # config["secret_access_key"]
+        aws_access_key_id = config["access_key_id"]
+        aws_secret_access_key = config["secret_access_key"]
         region_name = config["s3_bucket_region"]
         endpoint_url = config.get("s3_endpoint")  # Get the endpoint URL if it exists
 
@@ -64,6 +64,7 @@ class DestinationS3deepkeep(Destination):
             streams = defaultdict(list)
 
             for message in input_messages:
+                print("message", message)
                 if message.type == Type.STATE:
                     yield message
                 elif message.type == Type.RECORD:
@@ -72,7 +73,7 @@ class DestinationS3deepkeep(Destination):
                     streams[record.stream].append(
                         {
                             "data": record.data,
-                            "emitted_at": record.emitted_at,
+                            # "emitted_at": record.emitted_at,
                         }
                     )
                 else:
