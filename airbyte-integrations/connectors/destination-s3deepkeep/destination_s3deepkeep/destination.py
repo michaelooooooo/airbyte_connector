@@ -26,6 +26,7 @@ class DestinationS3deepkeep(Destination):
         ODO
         Reads the input stream of messages, config, and catalog to write data to the destination.
 
+
         This method returns an iterable (typically a generator of AirbyteMessages via yield) containing state messages received
         in the input message stream. Outputting a state message means that every AirbyteRecordMessage which came before it has been
         successfully persisted to the destination. This is used to ensure fault tolerance in the case that a sync fails before fully completing,
