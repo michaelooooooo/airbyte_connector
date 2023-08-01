@@ -38,26 +38,20 @@ class DestinationS3deepkeep(Destination):
         :param input_messages: The stream of input messages received from the source
         :return: Iterable of AirbyteStateMessages wrapped in AirbyteMessage structs
         """
-        print("michael ver4")
-        print(configured_catalog)
-        print("input_messages")
-        print(input_messages)
-        # Get S3 configurations from the config
-        print("config ")
-        print(config)
+        print("start write function")
+        print("configured_catalog= ", configured_catalog)
+        print("input_messages=", input_messages)
+        print('config=', config)
+
         bucket_name = config["s3_bucket_name"]
-        aws_access_key_id = config["access_key_id"]
-        aws_secret_access_key = config["secret_access_key"]
-        region_name = config["s3_bucket_region"]
-        endpoint_url = config.get("s3_endpoint")  # Get the endpoint URL if it exists
 
         try:
             s3 = boto3.resource(
                 "s3",
-                aws_access_key_id=aws_access_key_id,
-                aws_secret_access_key=aws_secret_access_key,
-                region_name=region_name,
-                endpoint_url=endpoint_url,  # Add the endpoint URL to the resource parameters
+                aws_access_key_id=config["access_key_id"],
+                aws_secret_access_key=config["secret_access_key"],
+                region_name=config["s3_bucket_region"],
+                endpoint_url=config.get("s3_endpoint"),  # Add the endpoint URL to the resource parameters
             )
 
             # Create a dictionary to hold the records for each stream
@@ -85,6 +79,8 @@ class DestinationS3deepkeep(Destination):
 
         except NoCredentialsError:
             print("No AWS credentials found in the config file ")
+        except Exception as e:
+            print("An exception occurred: ", repr(e))
 
         pass
 
