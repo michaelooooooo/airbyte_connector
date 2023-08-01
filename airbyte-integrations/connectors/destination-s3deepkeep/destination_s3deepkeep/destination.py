@@ -41,7 +41,7 @@ class DestinationS3deepkeep(Destination):
         print("start write function")
         print("configured_catalog= ", configured_catalog)
         print("input_messages=", input_messages)
-        print('config=', config)
+        print("config=", config)
 
         bucket_name = config["s3_bucket_name"]
 
